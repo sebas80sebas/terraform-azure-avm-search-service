@@ -1,0 +1,9 @@
+# CHANGELOG
+
+## 0.1.0 (2026-03-23)
+
+- Initial release of the Azure AI Search wrapper module.
+- Integration with AVM Search Service module (`Azure/avm-res-search-searchservice/azurerm`).
+- Implementation of AVM telemetry.
+- Added default and private-endpoint examples.
+- Configured GitHub Actions workflows for validation, PR automation, and tagging.

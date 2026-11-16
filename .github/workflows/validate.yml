@@ -1,0 +1,39 @@
+name: "Validate and Test"
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    validate-module:
+        name: "Validate Module"
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: hashicorp/setup-terraform@v3
+            - name: Terraform Init (Module Root)
+              run: terraform init -backend=false
+            - name: Terraform Validate (Module Root)
+              run: terraform validate
+
+    validate-examples:
+        name: "Validate Examples"
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                example:
+                    - default
+                    - private-endpoint
+        steps:
+            - uses: actions/checkout@v4
+            - uses: hashicorp/setup-terraform@v3
+            - name: Terraform Init (Example)
+              run: |
+                  cd examples/${{ matrix.example }}
+                  terraform init -backend=false
+            - name: Terraform Validate (Example)
+              run: |
+                  cd examples/${{ matrix.example }}
+                  terraform validate

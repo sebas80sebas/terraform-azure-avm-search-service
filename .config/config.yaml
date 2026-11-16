@@ -1,0 +1,4 @@
+avm_type: module
+resource_info:
+  name: azurerm_search_service
+version: 0.1.0
